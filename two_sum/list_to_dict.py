@@ -5,14 +5,6 @@
 
 class Solution(object):
     '''two sum'''
-    def nested_traverse(self, nums, target):
-        '''traverse list for i and j'''
-        for i in xrange(0, len(nums)):
-            another = target-nums[i]
-            for j in xrange(0, len(nums)):
-                if i != j and nums[j] == another:
-                    return [i, j]
-
     def list_to_dict(self, nums, target):
         '''
         convert list to dictionary, and then use key exist to calculate
