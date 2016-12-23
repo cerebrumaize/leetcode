@@ -10,17 +10,18 @@ class Solution(object):
         Solution function description
         '''
         res = []
-        temp = ''
         for i in xrange(1, upper + 1):
             if (i % 5 == 0) & (i % 3 == 0):
-                temp = 'FizzBuzz'
+                res.append('FizzBuzz')
+                continue
             elif i % 5 == 0:
-                temp = 'Buzz'
+                res.append('Buzz')
+                continue
             elif i % 3 == 0:
-                temp = 'Fizz'
+                res.append('Fizz')
+                continue
             else:
-                temp = str(i)
-            res.append(temp)
+                res.append(str(i))
 
         return res
 
