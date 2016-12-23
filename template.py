@@ -5,7 +5,7 @@
 
 class Solution(object):
     '''Solution description'''
-    def list_to_dict(self, nums, target):
+    def func(self, nums, target):
         '''
         Solution function description
         '''
@@ -13,7 +13,7 @@ class Solution(object):
 def main():
     '''main function'''
     _solution = Solution()
-    res = _solution.list_to_dict([0, 4, 3, 0], 0)
+    res = _solution.func(a, b)
     print res
 
 if __name__ == "__main__":
