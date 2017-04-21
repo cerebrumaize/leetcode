@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python
 '''code description'''
 # pylint: disable = I0011, E0401, C0103
@@ -13,6 +12,7 @@ class Solution(object):
             if l[122-ord(c)] != '1':
                 l[122-ord(c)] = "1"
         print "".join(c for c in l), len("".join(c for c in l))
+        #base is 2 rather than 10, considering ^&/ are all bitwise operations
         return int("".join(c for c in l), 2)
     def func(self, words):
         '''
