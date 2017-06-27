@@ -10,7 +10,7 @@ class Solution(object):
 def main():
     '''main function'''
     _solution = Solution()
-    res, inp = [], []
+    inp = []
     for i in inp:
         print(_solution.func(i[0], i[1]))
 
