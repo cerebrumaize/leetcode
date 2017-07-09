@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 '''code description'''
-# pylint: disable = I0011, E0401, C0103
+# pylint: disable = I0011, E0401, C0103, C0321
 
 class Solution(object):
     '''Solution description'''

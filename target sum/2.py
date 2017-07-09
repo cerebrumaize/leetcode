@@ -13,6 +13,7 @@ class Solution(object):
             for k in d:
                 tmpd[k+nums[i]] = tmpd.get(k+nums[i], 0)+d.get(k, 0)
                 tmpd[k-nums[i]] = tmpd.get(k-nums[i], 0)+d.get(k, 0)
+            print(tmpd)
             d = tmpd
         return d.get(S, 0)
 def main():
