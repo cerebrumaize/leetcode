@@ -1,2 +1,0 @@
-# leetcode
-personal_solutions
