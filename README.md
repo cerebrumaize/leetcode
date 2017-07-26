@@ -1,5 +1,6 @@
 # leetcode
-* **22.Generate Parentheses** 
+
+* **22.Generate Parentheses**
   * 尽管yield/next会省内存, 但遍历所有可能永远比只计算有限的可能要慢的多的多
   * 解决根本矛盾的好方法比边角细节的技巧要影响大的多
   * 出错尽快放弃比列举所有可能再逐一排查要快
