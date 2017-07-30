@@ -9,17 +9,20 @@ class Solution(object):
         if k == 1: return list(range(1, n+1))
         res = []
         list_k = [k]
-        self.helper(res, list(range(1, n+1)), list_k, n)
-        return res
-    def helper(self, cur_res, options, k, n):
+        self.helper([], list(range(1, n+1)), list_k, n, res)
+        return ''.join(str(c) for c in res[0])
+    def helper(self, cur_res, options, k, n, res):
         '''Solution helper description'''
         if not options:
             k[0] -= 1
-            if k[0] == 0: return
+            if k[0] == 0:
+                res.append(cur_res)
+                return
             cur_res = []
         for i, e in enumerate(options):
             if k[0] > 0:
-                self.helper(cur_res+[e], options[:i]+options[i+1:], k, n)
+                self.helper(cur_res+[e], options[:i]+options[i+1:], k, n, res)
+            else: break
 
 def main():
     '''main function'''
