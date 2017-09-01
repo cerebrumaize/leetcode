@@ -4,45 +4,36 @@
 
 class Solution(object):
     '''Solution description'''
-    def func(self, l):
+    def func(self, words):
         '''Solution function description'''
-        res = []
-        if len(l) <= 1: return ""
-        for i in range(1, len(l)):
-            tmp_len = len(min(l[i-1], l[i]))
-            for j in range(tmp_len):
-                if l[i-1][j] == l[i][j]: continue
-                else:
-                    res.append([l[i-1][j], l[i][j]])
+        pairs = []
+        for word in zip(words, words[1:]):
+            for a, b in zip(*word):
+                if a != b:
+                    pairs.append(a+b)
                     break
-        from functools import reduce
-        s = list(set(list(reduce(lambda x, y: x+y, res))))
-        graph = {}
-        visited = {}
-        for e in s:
-            graph[e] = []
-            visited[e] = 0
-        for pair in res:
-            graph[pair[0]].append(pair[1])
-        def noCircle(v, ans):
-            if visited[v] == -1: return False
-            if visited[v] == 1: return True
-            visited[v] = -1
-            for u in graph[v]:
-                if not noCircle(u, ans): return False
-            visited[v] = 1
-            ans.append(v)
-            return True
-        ans = []
-        if all(noCircle(i, ans) for i in s): return ''.join(reversed(ans))
-        else: return ''
+        chars = set(''.join(words))
+        order = []
+        while pairs:
+            free = chars - set(list(zip(*pairs))[1])
+            if not free:
+                return ''
+            order += free
+            pairs = list(filter(free.isdisjoint, pairs))
+            chars -= free
+        return ''.join(order + list(chars))
 
 def main():
     '''main function'''
     _solution = Solution()
-    inp = [["wrt", 'wrf', 'er', 'ett', 'rftt']]
+    inp = [["w", 'p', 'tzo', 'qc']]
     for i in inp:
         print(_solution.func(i))
 
 if __name__ == "__main__":
     main()
+
+'''
+这里值得注意的一点是, visited是用来保存已经访问过的节点, 一般情况下节点的标记不会是想list
+的索引一样是自然数(得用dict), 这里是自然数所以用了简单的列表
+'''
