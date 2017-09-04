@@ -3,36 +3,44 @@
 # pylint: disable = I0011, E0401, C0103, C0321
 
 class UndirectedGraphNode:
-    '''Class UndirectedGraphNode description'''
+    '''node class in an undirected graph'''
     def __init__(self, x):
         self.label = x
         self.neighbors = []
 
 class Solution(object):
-    '''
-    @param node, a undirected graph node
-    @return a undirected graph node
-    '''
+    '''Solution description'''
     def cloneGraph(self, node):
+        '''Solution function description'''
         if not node: return None
         root = UndirectedGraphNode(node.label)
-        stack = [node]
-        visited = {}
-        visited[node.label] = root
-        while stack:
-            top = stack.pop()
-            for n in top.neighbors:
-                if n.label not in visited.keys:
-                    stack.append(n)
-                    visited[n.label] = UndirectedGraphNode(n.label)
-                visited[n.label].neighbors.append(visited[n.label])
-
+        d_old_copy = {node: root}
+        cur_layer = [node]
+        self.bfs(cur_layer, d_old_copy)
         return root
+    def bfs(self, cur_layer, d_old_copy):
+        '''breadth first'''
+        while cur_layer:
+            node = cur_layer.pop()
+            for nb in node.neighbors:
+                if nb not in d_old_copy:
+                    d_old_copy[nb] = UndirectedGraphNode(nb.label)
+                    #only add unhandled node to stack instead of every neighbor
+                    cur_layer.append(nb)
+                d_old_copy[node].neighbors.append(d_old_copy[nb])
+
+    def dfs(self, node, d_old_copy):
+        '''depth first'''
+        for nb in node.neighbors:
+            if nb not in d_old_copy:
+                d_old_copy[nb] = UndirectedGraphNode(nb.label)
+                self.dfs(nb, d_old_copy)
+            d_old_copy[node].neighbors.append(d_old_copy[nb])
 
 def main():
     '''main function'''
     _solution = Solution()
-    inp = [{0,0,0}]
+    inp = []
     for i in inp:
         print(_solution.cloneGraph(i))
 
