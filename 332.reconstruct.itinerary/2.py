@@ -6,14 +6,13 @@ class Solution(object):
     '''Solution description'''
     def func(self, tickets):
         '''Solution function description'''
+        tickets.sort(reverse=True)
         from collections import defaultdict
-        graph = defaultdict(list)
-        tickets.sort(key=lambda x: x[0]+x[1])
-        for f, t in tickets:
-            graph[f].append(t)
+        graph=defaultdict(list)
+        for f, t in tickets: graph[f].append(t)
         res, stack = [], ['JFK']
         while stack:
-            while graph[stack[-1]]:
+            while(graph[stack[-1]]):
                 stack.append(graph[stack[-1]].pop())
             res.append(stack.pop())
         return res[::-1]

@@ -8,7 +8,7 @@ class Solution(object):
         '''Solution function description'''
         from collections import defaultdict
         graph = defaultdict(list)
-        tickets = sorted(tickets, key=lambda x: x[0]+x[1])
+        tickets = sorted(tickets, reverse=True)
         for f, t in tickets:
             graph[f].append(t)
         res = []
@@ -18,7 +18,7 @@ class Solution(object):
                 dfs(graph[source].pop())
             res.append(source)
         dfs('JFK')
-        return res.sort(reverse=True)
+        return res[::-1]
 def main():
     '''main function'''
     _solution = Solution()
