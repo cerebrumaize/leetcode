@@ -4,15 +4,17 @@
 
 class Solution(object):
     '''Solution description'''
-    def func(self, nums, target):
+    def func(self, s):
         '''Solution function description'''
+        res=sorted([[s.count(word), word] for word in set(s)], reverse=True)
+        return ''.join([x[0]*x[1] for x in res])
 
 def main():
     '''main function'''
     _solution = Solution()
-    inp = []
+    inp = ['tree', 'energetic']
     for i in inp:
-        print(_solution.func(i[0], i[1]))
+        print(_solution.func(i))
 
 if __name__ == "__main__":
     main()

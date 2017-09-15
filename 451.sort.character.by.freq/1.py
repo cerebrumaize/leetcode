@@ -6,6 +6,11 @@ class Solution(object):
     '''Solution description'''
     def func(self, nums, target):
         '''Solution function description'''
+        from collections import Counter
+        s=[t for t in Counter(s).items()]
+        s.sort(key=lambda t:t[1], reverse=True)
+        res = [k*v for k,v in s]
+        return ''.join(res)
 
 def main():
     '''main function'''
