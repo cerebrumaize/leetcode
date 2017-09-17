@@ -6,16 +6,10 @@ class Solution(object):
     '''Solution description'''
     def func(self, nums1, nums2, k):
         '''Solution function description'''
-        d = {}
-        for i in nums1:
-            for j in nums2:
-                if i+j not in d: d[i+j]=[[i,j]]
-                else: d[i+j].append([i,j])
-        res = []
-        for k,v in sorted(d.items(), key=lambda x:x[0]):
-            res += v
-            if len(res) >= k: break
-        return res[:k]
+        from heapq import nsmallest
+        from itertools import product
+        return list(map(list, nsmallest(k, product(nums1, nums2), key=sum)))
+        #return nsmallest(k, ([u, v] for u in nums1 for v in nums2), key=sum)
 
 def main():
     '''main function'''

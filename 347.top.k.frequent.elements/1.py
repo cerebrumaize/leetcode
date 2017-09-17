@@ -4,13 +4,17 @@
 
 class Solution(object):
     '''Solution description'''
-    def func(self, nums, target):
+    def func(self, nums, k):
         '''Solution function description'''
+        from collections import Counter
+        nums = Counter(nums)
+        res = nums.most_common(k)
+        return [x[0] for x in res]
 
 def main():
     '''main function'''
     _solution = Solution()
-    inp = []
+    inp = [([1,1,2,1,4,5,2,2,2,2], 2)]
     for i in inp:
         print(_solution.func(i[0], i[1]))
 
