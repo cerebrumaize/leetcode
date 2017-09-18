@@ -7,7 +7,6 @@ class Solution(object):
     def func(self, nums1, nums2, k):
         '''Solution function description'''
         from heapq import heappop, heappush
-        from itertools import product
         queue = []
         def push(i, j):
             if i < len(nums1) and j < len(nums2):
@@ -16,16 +15,19 @@ class Solution(object):
         pairs = []
         while queue and len(pairs) < k:
             _, i, j = heappop(queue)
+            print('pop ', queue)
             pairs.append([nums1[i], nums2[j]])
             push(i, j+1)
+            print('push ', queue)
             if j == 0:
                 push(i+1, 0)
+                print('push ', queue)
         return pairs
 
 def main():
     '''main function'''
     _solution = Solution()
-    inp = [([1,1,2], [1,2,3], 2)]
+    inp = [([1,2,3], [1,2,2], 8)]
     for i in inp:
         print(_solution.func(i[0], i[1], i[2]))
 
