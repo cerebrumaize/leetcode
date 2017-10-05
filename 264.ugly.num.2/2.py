@@ -21,7 +21,7 @@ class Solution(object):
 def main():
     '''main function'''
     _solution = Solution()
-    inp = [1600, 1601, 1602, 1609]
+    inp = [1, 3, 4, 5, 6, 7, 8]
     for i in inp:
         print(_solution.func(i))
 
