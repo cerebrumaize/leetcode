@@ -5,18 +5,25 @@
 class Solution(object):
     '''Solution description'''
     def func(self, nums):
+        import heapq
         '''Solution function description'''
         if len(nums) < 3: return False
-        prev = nums[0]-1
-        count = 0
-        for i, e in enumerate(nums):
-            if e != prev+1:
-                if count < 3: return False
-                count = 1
+        runs = {}
+        for v in nums:
+            if v-1 not in runs:
+                if v not in runs:
+                    runs[v] = [1]
+                else:
+                    heapq.heappush(runs[v], 1)
             else:
-                count += 1
-            prev = e
-        if count < 3: return False
+                length = heapq.heappop(runs[v-1])+1
+                if len(runs[v-1]) == 0: del runs[v-1]
+                if v not in runs:
+                    runs[v] = []
+                heapq.heappush(runs[v], length)
+        for v, hp in runs.items():
+            if len(hp) > 0 and min(hp) < 3:
+                return False
         return True
 
 def main():
