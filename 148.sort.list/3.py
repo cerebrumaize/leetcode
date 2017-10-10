@@ -1,38 +1,48 @@
 #!/usr/bin/env python
 '''code description'''
 # pylint: disable = I0011, E0401, C0103, C0321
-
-# Definition for singly-linked list.
 class ListNode(object):
     def __init__(self, x):
         self.val = x
         self.next = None
 
 class Solution(object):
+    '''Solution description'''
     def sortList(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        if not head or head.next is None: return head
+        '''Solution function description'''
+        '''but this is not in place, mem is n, not constant'''
+        if not head or not head.next: return head
+        fast, slow = head, head
+        while fast and fast.next and slow:
+            pre, slow, fast = slow, slow.next, fast.next.next
 
-        pre, step1, step2 = None, head, head
-        #below is the standard way to find mid/mid+1 pos in linked list, step1 is pivot
-        while step2 and step2.next:
-            pre, step1, step2 = step1, step1.next, step2.next.next
+        if slow == fast: return head
+        post = pre.next
         pre.next = None
-        return self.merge(*map(self.sortList, (head, step1)))
+        prior = self.sortList(head)
+        post = self.sortList(post)
+        res = self.merge(prior, post)
+        return res
 
     def merge(self, h1, h2):
-        dummy = tail = ListNode(None)
-        while h1 and h2:
-            if h1.val < h2.val:
-                tail.next, tail, h1 = h1, h1, h1.next
-            else:
-                tail.next, tail, h2 = h2, h2, h2.next
+        if h1.val < h2.val:
+            head = h1
+            c1 = h1
+            c2 = h2
+        else:
+            head = h2
+            c1 = h2
+            c2 = h1
+        while c2:
+            while c1.next and c1.next.val <= c2.val:
+                c1 = c1.next
+            tmp = c1.next
+            c1.next = c2
+            c2 = tmp
+            c1 = c1.next
 
-        tail.next = h1 or h2
-        return dummy.next
+        return head
+
 
 def stringToIntegerList(input):
     input = input.strip()
